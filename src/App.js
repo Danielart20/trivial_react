@@ -1,32 +1,28 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import Inicio from './componentes/Start'
-import Game from './componentes/Game'
+import Game from './componentes/Game/Game'
 
 function App() {
 
-  const [showGame, setShowGame] = useState(true);
-  const [players, setPlayers] = useState([]);
-
+  const [showGame, setShowGame] = useState(JSON.parse(localStorage.getItem('setShowGame')));
+  const [players, setPlayers] = useState(JSON.parse(localStorage.getItem('players')));
+ console.log(players)
 
 
   return (
     <Fragment>
-      <div class="container"> 
-        
-        {showGame ? (
-          <Inicio 
-            setShowGame={setShowGame}
-            players={setPlayers}
-          />
-
-        ):(
-          <Game 
+      <div class="container">
+      {showGame ? (
+        <Inicio 
+          setShowGame={setShowGame}
+          setPlayers={setPlayers}
+      />) : (
+        <Game 
           playersp={players}
-          />
-        ) }
-    
-    </div>  
-
+        />)}
+          
+          
+      </div>
     </Fragment>
   );
 }

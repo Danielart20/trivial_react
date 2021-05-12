@@ -1,11 +1,12 @@
 import React, {useState, Fragment, useEffect} from 'react';
 import axios from 'axios';
-import Players from './Players'
+import Players from '../Players'
 import Question from './Question'
 import Categories from './Categories';
 
 
 const Game = ({playersp}) => {
+    console.log(playersp)
 
     const [call, setCall] = useState([]);
     const [showQuestion, setShowQuestion] = useState(false);
@@ -14,7 +15,6 @@ const Game = ({playersp}) => {
         axios.post('https://opentdb.com/api.php?amount=5&difficulty=easy')
         .then(res => {
             setCall(res.data.results);
-            console.log(res.data.results) 
             
          }) 
         .catch(err => { 

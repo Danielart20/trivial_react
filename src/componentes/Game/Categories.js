@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 
 
-const Categories = ({category, }) => {
+const Categories = ({category }) => {
 
 
     return (

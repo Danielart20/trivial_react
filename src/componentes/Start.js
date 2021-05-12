@@ -3,7 +3,8 @@ import Error from './Error'
 import Imagen from '../img/trivial.png'
 
 
-const Inicio = ({setShowGame, players}) => {
+
+const Inicio = ({setShowGame, setPlayers}) => {
 
     const [error, setError] = useState(false);
 
@@ -36,8 +37,10 @@ const Inicio = ({setShowGame, players}) => {
             return;
         }
         
-        setShowGame(false)
-        players([player1, player2, player3, player4])
+        setShowGame(false);
+        setPlayers([player1, player2, player3, player4])
+        localStorage.setItem('setShowGame', JSON.stringify(false));
+        localStorage.setItem('players', JSON.stringify([player1, player2, player3, player4]));
         
 
     }
@@ -45,6 +48,7 @@ const Inicio = ({setShowGame, players}) => {
 
     return ( 
         <Fragment>
+
             <div className="wrapper">
             <h1>Trivia</h1>
                 {error ? <div className="messageError"><Error message="Complete all the fields" /></div> : null}
@@ -54,10 +58,11 @@ const Inicio = ({setShowGame, players}) => {
                     <label htmlFor="player3">Player 3 <input type="text" name="player3"  onChange={ e => setPlayer3({...player3, name : e.target.value})}/></label>
                     <label htmlFor="player4">Player 4 <input type="text" name="player4"  onChange={ e => setPlayer4({...player4, name : e.target.value})}/></label>
                 
-                    <br/><input type="submit" value="Play"/>
+                    <br/><input type="submit" value="Play" />
                 </form>
                 <img src={Imagen} alt="trivial image" className="rotate"/>
             </div>
+
         </Fragment>
 
 

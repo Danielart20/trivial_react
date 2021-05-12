@@ -2,6 +2,7 @@ import React, {useState, Fragment} from 'react'
 import Player from './Player'
 
 const Players = ({players}) => {
+    console.log(players)
     return ( 
         <Fragment>
             <div className="players">
