@@ -3,10 +3,16 @@ import Inicio from './componentes/Start'
 import Game from './componentes/Game/Game'
 
 function App() {
+  var bool = new Boolean;
 
-  const [showGame, setShowGame] = useState(JSON.parse(localStorage.getItem('setShowGame')));
+  if(localStorage.getItem("setShowGame")){
+    bool = JSON.parse(localStorage.getItem("setShowGame"))
+  }else{
+    bool = true;
+  }
+  const [showGame, setShowGame] = useState(bool);
   const [players, setPlayers] = useState(JSON.parse(localStorage.getItem('players')));
- console.log(players)
+  console.log(players)
 
 
   return (

@@ -1,6 +1,7 @@
 import React, {useState, Fragment} from 'react'
 import Error from './Error'
 import Imagen from '../img/trivial.png'
+import axios from 'axios'
 
 
 
@@ -41,7 +42,7 @@ const Inicio = ({setShowGame, setPlayers}) => {
         setPlayers([player1, player2, player3, player4])
         localStorage.setItem('setShowGame', JSON.stringify(false));
         localStorage.setItem('players', JSON.stringify([player1, player2, player3, player4]));
-        
+
 
     }
 

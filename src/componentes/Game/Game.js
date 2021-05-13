@@ -6,22 +6,24 @@ import Categories from './Categories';
 
 
 const Game = ({playersp}) => {
-    console.log(playersp)
 
-    const [call, setCall] = useState([]);
+
+    const [call, setCall] = useState(JSON.parse(localStorage.getItem("call")) || []);
     const [showQuestion, setShowQuestion] = useState(false);
+    const [categorySelected, setCategorySelected] = useState("");
+    console.log(categorySelected)
+    console.log(call)
 
-    useEffect(() => {
+    if(call.length == 0){
         axios.post('https://opentdb.com/api.php?amount=5&difficulty=easy')
         .then(res => {
+            localStorage.setItem("call", JSON.stringify(res.data.results));
             setCall(res.data.results);
             
-         }) 
-        .catch(err => { 
-            console.log(err) 
-     }) }, []);
+        }) 
+        
+    }
 
-    
 
 
     return (
@@ -33,23 +35,20 @@ const Game = ({playersp}) => {
                 (
                     <div className="questions">
                     <h2>Question</h2>
-                        {call.map((q) => 
-                            <Question 
-                                question={q.question}
-                                correctAnswer={q.correct_answer}
-                                incorrectAnswers={q.incorrect_answers}
-                            />
-                        )}
+                        <Question 
+                            call={call}
+                            categorySelected={categorySelected}
+                        /> 
                     </div>
                 ):(
                     <div className="categories">
                         <h2>Categories</h2>
                         <ul>
-                            {call.map((c) => 
-                                <Categories 
-                                    category={c.category}
-                                />
-                            )}
+                            <Categories 
+                                call={call}
+                                setShowQuestion={setShowQuestion}
+                                setCategorySelected={setCategorySelected}
+                            />
                         </ul>
                     </div>
                 )}
