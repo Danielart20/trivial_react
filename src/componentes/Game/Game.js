@@ -31,6 +31,7 @@ const Game = ({playersp}) => {
 
     return (
         <Fragment>
+            <div><p>If u want to win, jus hit 100 points!</p></div>
             <Players 
                 players={playersp}
             />

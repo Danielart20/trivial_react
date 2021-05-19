@@ -77,7 +77,27 @@ const Question = ({categorySelected, isTurnFor, setShowQuestion}) => {
     
         });
     }
-    
+
+
+    function end_game(winner){
+        setTimeout(function(){ 
+            localStorage.clear(); 
+            localStorage.setItem('setShowGame', JSON.stringify(true));
+            window.location.reload(false); }, 2000);
+        alert("the winner is " + winner);
+        
+    }
+
+    //en caso de que alguien llegue a los 100 puntos, se acaba el juego
+    function maybe_winner(){
+        var players = JSON.parse(localStorage.getItem("players"));
+        for (let t = 0; t < players.length; t++) {
+            if(players[t].points === 100){
+                end_game(players[t].name);
+            }
+            
+        }
+    }
     
 
     function check(ans){
@@ -87,7 +107,9 @@ const Question = ({categorySelected, isTurnFor, setShowQuestion}) => {
         if(ans === categorySelected.correct_answer){
             //en caso de acertar, se suman 10 puntos al jugador, se pasa el turno y se borra la categoria previamente seleccionada
             plus_10_points();
-            delete_category();    
+            delete_category();
+            maybe_winner();
+                
         }else{
             //en caso de fallar, se pasa turno y se borra la categoria
             pass_turn();
