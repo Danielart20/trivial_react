@@ -1,4 +1,4 @@
-import React, {useState, Fragment, useEffect} from 'react';
+import React, {useState, Fragment} from 'react';
 import axios from 'axios';
 import Players from '../Players'
 import Question from './Question'
@@ -6,15 +6,20 @@ import Categories from './Categories';
 
 
 const Game = ({playersp}) => {
-
+    if(localStorage.getItem("turn")){
+        var turn = JSON.parse(localStorage.getItem("turn"));
+    }else{
+        var turn = 0;
+    }
+    console.log(turn)
 
     const [call, setCall] = useState(JSON.parse(localStorage.getItem("call")) || []);
     const [showQuestion, setShowQuestion] = useState(false);
     const [categorySelected, setCategorySelected] = useState("");
-    console.log(categorySelected)
-    console.log(call)
+    const [isTurnFor, setTurn] = useState(playersp[turn]);
 
-    if(call.length == 0){
+
+    if(call.length === 0){
         axios.post('https://opentdb.com/api.php?amount=5&difficulty=easy')
         .then(res => {
             localStorage.setItem("call", JSON.stringify(res.data.results));
@@ -24,20 +29,20 @@ const Game = ({playersp}) => {
         
     }
 
-
-
     return (
         <Fragment>
             <Players 
                 players={playersp}
             />
+            <h1>Is Turn For: {isTurnFor.name}</h1>
             { showQuestion ? 
                 (
                     <div className="questions">
                     <h2>Question</h2>
                         <Question 
-                            call={call}
                             categorySelected={categorySelected}
+                            isTurnFor={isTurnFor}
+                            setShowQuestion={setShowQuestion}
                         /> 
                     </div>
                 ):(
@@ -52,11 +57,7 @@ const Game = ({playersp}) => {
                         </ul>
                     </div>
                 )}
-            
-
         </Fragment>
-
-
      );
 }
  

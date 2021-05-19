@@ -1,7 +1,6 @@
 import React, {useState, Fragment} from 'react'
 import Error from './Error'
 import Imagen from '../img/trivial.png'
-import axios from 'axios'
 
 
 
@@ -11,29 +10,29 @@ const Inicio = ({setShowGame, setPlayers}) => {
 
         const [player1, setPlayer1] = useState({
             name : '',
-            points : ''
+            points : 0
             });
     
         const [player2, setPlayer2] = useState({
             name : '',
-            points : ''
+            points : 0
         });
     
         const [player3, setPlayer3] = useState({
             name : '',
-            points : ''
+            points : 0
         });
     
         const [player4, setPlayer4] = useState({
             name : '',
-            points : ''
+            points : 0
         });
 
     const validar = e =>{
         
         e.preventDefault();
 
-        if (player1.name == "" || player2.name == "" || player3.name == "" || player4.name == ""){
+        if (player1.name === "" || player2.name === "" || player3.name === "" || player4.name === ""){
             setError(true);
             return;
         }
@@ -61,7 +60,7 @@ const Inicio = ({setShowGame, setPlayers}) => {
                 
                     <br/><input type="submit" value="Play" />
                 </form>
-                <img src={Imagen} alt="trivial image" className="rotate"/>
+                <img src={Imagen} alt="trivial logo" className="rotate"/>
             </div>
 
         </Fragment>

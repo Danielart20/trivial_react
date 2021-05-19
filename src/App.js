@@ -1,10 +1,10 @@
-import React, {Fragment, useState, useEffect} from 'react'
-import Inicio from './componentes/Start'
+import React, {useState} from 'react'
+import Start from './componentes/Start'
 import Game from './componentes/Game/Game'
 
 function App() {
-  var bool = new Boolean;
-
+  var bool;
+  
   if(localStorage.getItem("setShowGame")){
     bool = JSON.parse(localStorage.getItem("setShowGame"))
   }else{
@@ -12,14 +12,13 @@ function App() {
   }
   const [showGame, setShowGame] = useState(bool);
   const [players, setPlayers] = useState(JSON.parse(localStorage.getItem('players')));
-  console.log(players)
 
 
   return (
-    <Fragment>
-      <div class="container">
+
+      <div className="container">
       {showGame ? (
-        <Inicio 
+        <Start 
           setShowGame={setShowGame}
           setPlayers={setPlayers}
       />) : (
@@ -29,7 +28,7 @@ function App() {
           
           
       </div>
-    </Fragment>
+
   );
 }
 

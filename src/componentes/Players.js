@@ -1,11 +1,9 @@
-import React, {useState, Fragment} from 'react'
+import React from 'react'
 import Player from './Player'
 
 const Players = ({players}) => {
-    console.log(players)
     return ( 
-        <Fragment>
-            <div className="players">
+        <div className="players">
             <Player 
                 player={players[0]}
             />
@@ -19,7 +17,7 @@ const Players = ({players}) => {
                 player={players[3]}
             />
         </div>
-        </Fragment>
+
 
      );
 }
